@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Media;
 
 
 namespace MonAlarm
@@ -69,13 +70,15 @@ namespace MonAlarm
             
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string a = openFileDialog1.SafeFileName;
-                textBox1.Text = a;
+                textBox1.Text = openFileDialog1.SafeFileName;
+                
+                
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
             ChanegeList chanegelist = new ChanegeList();
             chanegelist.ShowDialog();
             // changelist에서 선택된 애들을 가져와서
@@ -137,12 +140,10 @@ namespace MonAlarm
             sw.WriteLine(numericUpDown2.Value);
             sw.Close();
 
-            StreamReader sr = new StreamReader(new FileStream("time.txt", FileMode.Open));
             label6.Text = string.Format("현재설정시간은 {0}시 {1}분 입니다."
-                , sr.ReadLine(), sr.ReadLine());
-            sr.Close();
-
+                , numericUpDown1.Value, numericUpDown2.Value);
         }
+        
 
         private void timer1_Tick(object sender, EventArgs e)//알람
         {
@@ -151,10 +152,23 @@ namespace MonAlarm
 
             if(System.DateTime.Now.Hour==Int16.Parse(sr.ReadLine())
                 &&System.DateTime.Now.Minute==Int16.Parse(sr.ReadLine())){
-                MessageBox.Show("알람!!!!!!!");
                 timer1.Stop();
+                
+                AlarmPage alarmpage = new AlarmPage();
+
+                
+                alarmpage.ShowDialog();
+
+                
+
             }
+
             sr.Close();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public class Alarm

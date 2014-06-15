@@ -34,7 +34,9 @@ namespace MonAlarm
             CheckedListBox.CheckedItemCollection  checkedItems = checkedListBox1.CheckedItems;
             foreach (object item in checkedItems)
             {
-                MessageBox.Show(item.ToString());
+                StreamWriter sw = new StreamWriter(new FileStream("Things.txt", FileMode.Open));
+               
+                sw.Close();
             }
         }         
     }
