@@ -82,24 +82,23 @@ namespace MonAlarm
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//변경 화면 출력
         {
             
             ChanegeList chanegelist = new ChanegeList();
             chanegelist.ShowDialog();
-            // changelist에서 선택된 애들을 가져와서
-            // 지우는 작업
+            
         }
 
         private void textbox2_TextChanged(object sender, EventArgs e)
         {
 
-        }
+        }//없음
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
+        }//없음
 
         private void button3_Click(object sender, EventArgs e)//things.txt에 입력하는 코드
         {
@@ -114,6 +113,7 @@ namespace MonAlarm
                 listBox1.Items.Add(sr.ReadLine());
             }
             sr.Close();
+            textBox2.Text = "";
         }
 
         private void textbox2_textchanged(object sender, EventArgs e)
@@ -121,7 +121,8 @@ namespace MonAlarm
 
         }
 
-        private void textBox2_KeyDown(object sender, KeyEventArgs e)//things.txt에 입력하는 코드와 그걸 엔터로도 가능하게 하는것. 근데 현재 엔터를 누르면 실행은 되나 경고음이 남
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+            //things.txt에 입력하는 코드와 그걸 엔터로도 가능하게 하는것. 근데 현재 엔터를 누르면 실행은 되나 경고음이 남
         {
             if (e.KeyCode == Keys.Enter) {
                 StreamWriter sw = new StreamWriter(new FileStream("Things.txt", FileMode.Append));
@@ -156,7 +157,7 @@ namespace MonAlarm
             ShowTime();
             StreamReader sr = new StreamReader(new FileStream("time.txt", FileMode.Open));
 
-            if(System.DateTime.Now.Hour==Int16.Parse(sr.ReadLine())
+            if(System.DateTime.Now.Hour==Int16.Parse(sr.ReadLine())//분은 계속 같을 수 있으므로 초까지 조건에 추가
                 &&System.DateTime.Now.Minute==Int16.Parse(sr.ReadLine())
                 &&System.DateTime.Now.Second==00){
                 timer1.Stop();
