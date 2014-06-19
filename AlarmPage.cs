@@ -64,12 +64,12 @@ namespace MonAlarm
             
         public void Playsong()
         {
-           
+            StreamReader sr = new StreamReader(new FileStream("music.txt", FileMode.Open));
             waveout = new WaveOut();
-            audiofilereader = new AudioFileReader(@"C:\Users\Zimin\Documents\Visual Studio 2013\Projects\ConsoleApplication3\MonAlarm\bin\Debug\song.mp3");
+            audiofilereader = new AudioFileReader(@sr.ReadLine());
             waveout.Init(audiofilereader);
             waveout.Play();
-            
+            sr.Close();
         }
 
         public void Stopsong()

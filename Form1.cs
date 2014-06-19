@@ -35,6 +35,10 @@ namespace MonAlarm
                 , sr2.ReadLine(), sr2.ReadLine());
             
             sr2.Close();
+
+            StreamReader sr3 = new StreamReader(new FileStream("music.txt", FileMode.Open));
+            textBox1.Text = sr3.ReadLine();
+            sr3.Close();
             
         }
         private void ShowTime() {
@@ -70,9 +74,11 @@ namespace MonAlarm
             
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                StreamWriter sr = new StreamWriter(new FileStream("music.txt", FileMode.Create));
                 textBox1.Text = openFileDialog1.SafeFileName;
-                
-                
+                sr.WriteLine(openFileDialog1.FileName);
+                sr.Close();
+
             }
         }
 
@@ -151,14 +157,15 @@ namespace MonAlarm
             StreamReader sr = new StreamReader(new FileStream("time.txt", FileMode.Open));
 
             if(System.DateTime.Now.Hour==Int16.Parse(sr.ReadLine())
-                &&System.DateTime.Now.Minute==Int16.Parse(sr.ReadLine())){
+                &&System.DateTime.Now.Minute==Int16.Parse(sr.ReadLine())
+                &&System.DateTime.Now.Second==00){
                 timer1.Stop();
                 
                 AlarmPage alarmpage = new AlarmPage();
 
                 
                 alarmpage.ShowDialog();
-
+                timer1.Start();
                 
 
             }
